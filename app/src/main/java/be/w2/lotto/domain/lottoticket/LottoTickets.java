@@ -24,7 +24,6 @@ public class LottoTickets {
         int autoNumberCount = lottoAmount - manualLottoNumbers.size();
         return lottoNumberGeneratables.stream()
                 .map(generatable -> generateLottoTickets(autoNumberCount, manualLottoNumbers, generatable))
-                .collect(Collectors.toList()).stream()
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
     }

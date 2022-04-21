@@ -37,7 +37,6 @@ public class AutoLottoNumberGenerator implements LottoNumberGeneratable {
                 entireLottoNumbers.stream()
                         .limit(LOTTO_TICKET_SIZE)
                         .sorted()
-                        .collect(Collectors.toList()).stream()
                         .map(LottoNumber::from)
                         .collect(Collectors.toList())
         );

@@ -3,6 +3,7 @@ package be.w2.lotto.domain.winningresult;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.IntStream;
 
 public class ProfitRate {
     private final BigInteger profitRate;
@@ -21,13 +22,10 @@ public class ProfitRate {
         return profitRate;
     }
 
-    private static BigInteger calculateProfitRate(List<WinningResult> winningResults, int purchaseAmount)
-            throws NoSuchElementException
-    {
+    private static BigInteger calculateProfitRate(List<WinningResult> winningResults, int purchaseAmount) {
         BigInteger profitSum = winningResults.stream()
                 .map(ProfitRate::calculateProfit)
-                .reduce(BigInteger::add)
-                .orElseThrow(NoSuchElementException::new);
+                .reduce(BigInteger.ZERO, BigInteger::add);
 
         return profitSum.multiply(MULTIPLY_BY_PERCENTAGE).divide(BigInteger.valueOf(purchaseAmount));
     }
